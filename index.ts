@@ -9,21 +9,18 @@ const getData: TGetData = (url) => {
             if (!response.ok) {
                 throw new Error(response.statusText)
             }
-            return response.json() as Promise<IComment[]>
+            return response.json();
         })
 }
 
-
-try {
-    getData(COMMENTS_URL).then(res => {
-        res.forEach(item => {
-            console.log('ID: ', item.id, 'Email: ', item.email);
-        })
+getData(COMMENTS_URL).then(res => {
+    res.forEach(item => {
+        console.log('ID: ', item.id, 'Email: ', item.email);
     })
-} catch (e) {
+}).catch(e => {
     if(e instanceof Error) {
         console.error(e.message)
     } else {
         console.error(String(e))
     }
-}
+})
